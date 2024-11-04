@@ -5,13 +5,12 @@
     "main": "index.js",
     "type": "module",
     "scripts": {
-        "server": "nodemon index.js",
         "start": "node index.js",
-        "build": "npm install && npm install --prefix client && npm run build --prefix client"
-
+        "dev": "nodemon index.js"
     },
-    "author": "",
-    "license": "ISC",
+
+    "author": "Your Name",
+    "license": "MIT",
     "dependencies": {
         "bcrypt": "^5.1.1",
         "cookie-parser": "^1.4.6",
@@ -25,5 +24,7 @@
     },
     "devDependencies": {
         "nodemon": "^3.1.7"
+
+
     }
 }
