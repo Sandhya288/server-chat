@@ -9,7 +9,7 @@ import messagesRoutes from "./routes/MessagesRoute.js";
 import setupSocket from "./socket.js";
 import channelRoutes from "./routes/ChannelRoutes.js";
 import { getUserInfo } from "./controllers/AuthController.js";
-
+import path from "path";
 
 
 dotenv.config();
@@ -17,6 +17,8 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT;
 const databaseURL = process.env.DATABSE_URL;
+
+const __dirname = path.resolve();
 
 app.use(
     cors({
@@ -37,7 +39,11 @@ app.use("/api/contacts", contactsRoutes);
 app.use("/api/messages", messagesRoutes);
 app.use("/api/channel", channelRoutes);
 
+app.use(express.static(path.join(__dirname, "/client/dist")));
 
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+})
 
 
 const server = app.listen(port, () => {
