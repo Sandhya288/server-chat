@@ -86,7 +86,7 @@ function App() {
             </PrivateRoute>
           }
         />
-         <Route path="/about/:firstName" element={<AboutUsPage />} />
+         <Route path="/:id" element={<AboutUsPage />} />
 
         <Route path="*" element={<Navigate to="/auth" />} />
       </Routes>

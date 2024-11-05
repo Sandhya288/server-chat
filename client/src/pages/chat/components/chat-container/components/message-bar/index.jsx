@@ -10,7 +10,6 @@ import { MESSAGE_TYPES, UPLOAD_FILE } from "@/lib/constants";
 import apiClient from "@/lib/api-client";
 import emailjs from 'emailjs-com';
 
-
 const MessageBar = () => {
   const emojiRef = useRef();
   const fileInputRef = useRef();
@@ -169,12 +168,12 @@ const MessageBar = () => {
   };
 
   return (
-    <div>
-      <div className="h-[10vh] bg-[#b6b6c0] flex justify-center items-center px-8 gap-6 mb-5">
-        <div className="flex-1 flex bg-[#41424b] rounded-md items-center gap-5 pr-4">
+    <div className="w-full">
+      <div className="h-[10vh] bg-[#b6b6c0] flex justify-center items-center px-4 md:px-8 gap-6 mb-5">
+        <div className="flex-1 flex bg-[#41424b] rounded-md items-center gap-3 md:gap-5 pr-4">
           <input
             type="text"
-            className="flex-1 p-5 bg-transparent rounded-md focus:border-none focus:outline-none"
+            className="flex-1 p-2 md:p-5 bg-transparent rounded-md focus:border-none focus:outline-none"
             placeholder="Enter message"
             value={message}
             onChange={handleMessageChange}
@@ -184,13 +183,13 @@ const MessageBar = () => {
             className="text-neutral-300 focus:border-none focus:outline-none focus:text-white transition-all duration-300"
             onClick={handlePaymentClick}
           >
-            <FaRupeeSign className="text-2xl" />
+            <FaRupeeSign className="text-xl md:text-2xl" />
           </button>
           <button
             className="text-neutral-300 focus:border-none focus:outline-none focus:text-white transition-all duration-300"
             onClick={handleAttachmentClick} // Trigger the file input click
           >
-            <GrAttachment className="text-2xl" />
+            <GrAttachment className="text-xl md:text-2xl" />
           </button>
           <input
             type="file"
@@ -203,7 +202,7 @@ const MessageBar = () => {
               className="text-neutral-300 focus:border-none focus:outline-none focus:text-white transition-all duration-300"
               onClick={() => setEmojiPickerOpen(true)}
             >
-              <RiEmojiStickerLine className="text-2xl " />
+              <RiEmojiStickerLine className="text-xl md:text-2xl " />
             </button>
             <div className="absolute bottom-16 right-0" ref={emojiRef}>
               <EmojiPicker
@@ -216,89 +215,72 @@ const MessageBar = () => {
           </div>
         </div>
         <button
-          className="bg-[#23239c] rounded-md flex items-center justify-center p-4 gap-2 focus:border-none focus:outline-none hover:bg-[#1a1a5f] focus:bg-[#1a1a60] transition-all duration-300"
+          className="bg-[#23239c] rounded-md flex items-center justify-center p-2 md:p-4 gap-2 focus:border-none focus:outline-none hover:bg-[#1a1a5f] focus:bg-[#1a1a60] transition-all duration-300"
           onClick={handleSendMessage}
         >
-          <IoSend className="text-white text-2xl" />
+          <IoSend className="text-white text-xl md:text-2xl" />
         </button>
       </div>
 
       {/* Payment Form Pop-Up */}
-     
-{paymentFormOpen && (
-  <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
-    <div className="bg-[#1e1f29] p-6 rounded-lg shadow-xl w-96 relative">
-      <h3 className="text-white text-lg font-semibold mb-4 text-center border-b border-gray-600 pb-2">Payment Details</h3>
-      
-      <form onSubmit={handlePaymentSubmit} className="space-y-4">
-        <input
-          type="text"
-          name="name"
-          placeholder="Your Name"
-          value={formData.name}
-          onChange={handleInputChange}
-          required
-          className="block w-full p-3 bg-[#2e2f3a] text-white rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-        />
-        
-        <input
-          type="email"
-          name="email"
-          placeholder="Your Email"
-          value={formData.email}
-          onChange={handleInputChange}
-          required
-          className="block w-full p-3 bg-[#2e2f3a] text-white rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-        />
-
-        <input
-          type="amount"
-          name="amount"
-          value={userInfo.amount}
-          disabled
-          className="block w-full p-3 bg-[#2e2f3a] text-gray-400 rounded-md focus:outline-none cursor-not-allowed"
-        />
-
-        <input
-          type="text"
-          name="purpose"
-          placeholder="Purpose"
-          value={formData.purpose}
-          onChange={handleInputChange}
-          required
-          className="block w-full p-3 bg-[#2e2f3a] text-white rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-        />
-
-        <input
-          type="text"
-          name="timeDuration"
-          placeholder="Time Duration"
-          value={formData.timeDuration}
-          onChange={handleInputChange}
-          required
-          className="block w-full p-3 bg-[#2e2f3a] text-white rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-        />
-
-        <div className="flex items-center justify-between mt-6">
-          <button
-            type="submit"
-            className="w-full mr-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-600 text-white font-semibold py-3 rounded-md shadow-lg hover:shadow-xl transition-all duration-300"
-          >
-            Proceed
-          </button>
-          <button
-            type="button"
-            onClick={() => setPaymentFormOpen(false)}
-            className="w-full ml-2 text-red-500 font-semibold py-3 border border-red-500 rounded-md hover:bg-red-600 hover:text-white transition-all duration-300"
-          >
-            Cancel
-          </button>
+      {paymentFormOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+          <div className="bg-[#1e1f29] p-6 rounded-lg shadow-xl w-96 relative">
+            <h3 className="text-white text-lg font-semibold mb-4 text-center border-b border-gray-600 pb-2">Payment Details</h3>
+            <form onSubmit={handlePaymentSubmit} className="space-y-4">
+              <input
+                type="text"
+                name="name"
+                placeholder="Your Name"
+                value={formData.name}
+                onChange={handleInputChange}
+                required
+                className="block w-full p-3 bg-[#2e2f3a] text-white rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="Your Email"
+                value={formData.email}
+                onChange={handleInputChange}
+                required
+                className="block w-full p-3 bg-[#2e2f3a] text-white rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              />
+              <input
+                type="text"
+                name="purpose"
+                placeholder="Purpose"
+                value={formData.purpose}
+                onChange={handleInputChange}
+                required
+                className="block w-full p-3 bg-[#2e2f3a] text-white rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              />
+              <input
+                type="text"
+                name="timeDuration"
+                placeholder="Time Duration"
+                value={formData.timeDuration}
+                onChange={handleInputChange}
+                required
+                className="block w-full p-3 bg-[#2e2f3a] text-white rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              />
+              <button
+                type="submit"
+                className="bg-[#23239c] w-full p-3 rounded-md text-white font-semibold hover:bg-[#1a1a5f] transition-all duration-300"
+              >
+                Submit Payment
+              </button>
+              <button
+                type="button"
+                onClick={() => setPaymentFormOpen(false)}
+                className="absolute top-2 right-2 text-gray-400 hover:text-gray-200"
+              >
+                &times;
+              </button>
+            </form>
+          </div>
         </div>
-      </form>
-    </div>
-  </div>
-)}
-
+      )}
     </div>
   );
 };

@@ -121,15 +121,7 @@ const NewDM = () => {
                     <span>{contact.firstName}</span> {/* Only First Name */}
                     <span className="text-xs">{contact.email}</span>
                   </div>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleRequestContact(contact);
-                    }}
-                    className="text-sm bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600 transition"
-                  >
-                    Request
-                  </button>
+                 
                 </div>
               ))}
               {searchedContacts.length <= 0 && (
