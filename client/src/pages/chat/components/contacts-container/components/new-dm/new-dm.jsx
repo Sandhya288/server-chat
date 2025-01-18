@@ -51,10 +51,26 @@ const NewDM = () => {
     setsearchedContacts([]);
   };
 
-  const handleRequestContact = (contact) => {
-    // Logic for handling request contact can be added here
-    alert(`Request sent to ${contact.firstName}`);
+  const handleRequestContact = async (contact) => {
+    try {
+      const response = await apiClient.post(
+        `${HOST}/api/send-request`, // Correct backend route
+        { recipientId: contact._id }, // Send the recipientId correctly
+        { 
+          withCredentials: true, // Ensure cookies are sent if needed
+          headers: { 'Content-Type': 'application/json' } // Send content type as JSON
+        }
+      );
+      if (response.status === 200) {
+        alert(`Request sent to ${contact.firstName}`);
+      }
+    } catch (error) {
+      console.error("Failed to send request:", error);
+      alert("Failed to send request. Please try again.");
+    }
   };
+  
+  
 
   return (
     <>
@@ -78,7 +94,7 @@ const NewDM = () => {
             Please select a contact
           </DialogDescription>
           <DialogHeader>
-            <DialogTitle>Select a contact from Syncronus</DialogTitle>
+            <DialogTitle>Select a contact from Syncro</DialogTitle>
           </DialogHeader>
           <div>
             <Input
@@ -106,7 +122,7 @@ const NewDM = () => {
                         />
                       ) : (
                         <div
-                          className={`uppercase w-12 h-12 text-lg  border-[1px] ${getColor(
+                          className={`uppercase w-12 h-12 text-lg border-[1px] ${getColor(
                             contact.color
                           )} flex items-center justify-center rounded-full`}
                         >
@@ -118,12 +134,22 @@ const NewDM = () => {
                     </Avatar>
                   </div>
                   <div className="flex flex-col flex-1">
-                    <span>{contact.firstName}</span> {/* Only First Name */}
+                    <span>{contact.firstName}</span>
                     <span className="text-xs">{contact.email}</span>
                   </div>
-                 
+                  {/* Add Request Button */}
+                  <button
+                    className="text-blue-500 hover:underline text-sm"
+                    onClick={(e) => {
+                      e.stopPropagation(); // Prevents triggering selectNewContact
+                      handleRequestContact(contact);
+                    }}
+                  >
+                    Request
+                  </button>
                 </div>
               ))}
+
               {searchedContacts.length <= 0 && (
                 <div className="flex-1 md:flex mt-5 flex-col justify-center items-center hidden duration-1000 transition-all">
                   <Lottie

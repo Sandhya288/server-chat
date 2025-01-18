@@ -41,9 +41,11 @@ const Profile = () => {
 
   const [project1, setproject1] = useState("");
   const [project2, setproject2] = useState("");
-  
-  
 
+  const [home, setHome] = useState("");
+  const [about, setAbout] = useState("");
+  const [services, setServices] = useState("");
+  const [features, setFeatures] = useState("");
 
   /*
                     bankaccountholder,
@@ -117,6 +119,11 @@ const Profile = () => {
       setproject1(userInfo.project1|| "");
       setproject2(userInfo.project2|| "");
 
+      setHome(userInfo.home|| "");
+      setAbout(userInfo.about|| "");
+      setServices(userInfo.services|| "");
+      setFeatures(userInfo.features|| "");
+
     }
     if (userInfo.image) {
       setImage(`${HOST}/${userInfo.image}`);
@@ -154,6 +161,7 @@ const Profile = () => {
 
                     project1,
                     project2,
+                    home,about,services,features,
           },
           { withCredentials: true }
         );
@@ -473,6 +481,68 @@ const Profile = () => {
     value={upiid}
     onChange={(e) => setUpiid(e.target.value)}
   />
+</div>
+
+<h2 className=" flex  text-black mt-3"> Terms and Conditions</h2>
+
+<div className="flex items-center w-full">
+<textarea
+  placeholder="Home"
+  className="rounded-lg p-4 bg-[#afafb4] border-none text-black resize-none"
+  value={home}
+  onChange={(e) => setHome(e.target.value)}
+  style={{
+    whiteSpace: "pre-wrap",   // Preserve white space and wrap lines
+    overflow: "auto",         // Add scroll if the content overflows
+    width: "100%",            // Set to 100% to fill available container width
+    height: "150px",          // Adjust height as needed
+  }}
+/>
+</div>
+
+<div className="flex items-center w-full">
+<textarea
+  placeholder="About"
+  className="rounded-lg p-4 bg-[#afafb4] border-none text-black resize-none"
+  value={about}
+  onChange={(e) => setAbout(e.target.value)}
+  style={{
+    whiteSpace: "pre-wrap",   // Preserve white space and wrap lines
+    overflow: "auto",         // Add scroll if the content overflows
+    width: "100%",            // Set to 100% to fill available container width
+    height: "150px",          // Adjust height as needed
+  }}
+/>
+</div>
+
+<div className="flex items-center w-full">
+<textarea
+  placeholder="Services"
+  className="rounded-lg p-4 bg-[#afafb4] border-none text-black resize-none"
+  value={services}
+  onChange={(e) => setServices(e.target.value)}
+  style={{
+    whiteSpace: "pre-wrap",   // Preserve white space and wrap lines
+    overflow: "auto",         // Add scroll if the content overflows
+    width: "100%",            // Set to 100% to fill available container width
+    height: "150px",          // Adjust height as needed
+  }}
+/>
+</div>
+
+<div className="flex items-center w-full">
+<textarea
+  placeholder="Features"
+  className="rounded-lg p-4 bg-[#afafb4] border-none text-black resize-none"
+  value={features}
+  onChange={(e) => setFeatures(e.target.value)}
+  style={{
+    whiteSpace: "pre-wrap",   // Preserve white space and wrap lines
+    overflow: "auto",         // Add scroll if the content overflows
+    width: "100%",            // Set to 100% to fill available container width
+    height: "150px",          // Adjust height as needed
+  }}
+/>
 </div>
 
 

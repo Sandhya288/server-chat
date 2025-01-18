@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 import User from "../model/UserModel.js";
 import { compare } from "bcrypt";
 import { renameSync, unlinkSync } from "fs";
+import { features } from "process";
 
 const maxAge = 3 * 24 * 60 * 60 * 1000;
 
@@ -45,6 +46,13 @@ export const signup = async(req, res, next) => {
 
                     project1: user.project1,
                     project2: user.project2,
+
+                    home: user.home,
+                    about: user.about,
+                    services: user.services,
+                    features: user.features,
+
+
 
                 },
             });
@@ -97,6 +105,11 @@ export const login = async(req, res, next) => {
 
                     project1: user.project1,
                     project2: user.project2,
+
+                    home: user.home,
+                    about: user.about,
+                    services: user.services,
+                    features: user.features,
                 },
             });
         } else {
@@ -109,8 +122,10 @@ export const login = async(req, res, next) => {
 
 export const getUserInfo = async(request, response, next) => {
     try {
-        if (request.userId) {
-            const userData = await User.findById(request.userId);
+        const { id } = request.params;
+        console.log(id);
+        if (id) {
+            const userData = await User.findById(id);
             if (userData) {
                 return response.status(200).json({
                     id: userData.id,
@@ -135,6 +150,11 @@ export const getUserInfo = async(request, response, next) => {
 
                     project1: userData.project1,
                     project2: userData.project2,
+
+                    home: userData.home,
+                    about: userData.about,
+                    services: userData.services,
+                    features: userData.features,
                 });
             } else {
                 return response.status(404).send("User with the given id not found.");
@@ -179,6 +199,10 @@ export const updateProfile = async(request, response, next) => {
             upiid,
             project1,
             project2,
+            home,
+            about,
+            services,
+            features,
 
         } = request.body;
 
@@ -210,6 +234,11 @@ export const updateProfile = async(request, response, next) => {
                 upiid: upiid || "",
                 project1: project1 || "",
                 project2: project2 || "",
+
+                home: home || "",
+                about: about || "",
+                services: services || "",
+                features: features || "",
                 // Set twitter as empty string if not provided
                 profileSetup: true,
             }, {
@@ -241,6 +270,11 @@ export const updateProfile = async(request, response, next) => {
 
             project1: userData.project1,
             project2: userData.project2,
+
+            home: userData.home,
+            about: userData.about,
+            services: userData.services,
+            features: userData.features,
 
         });
     } catch (error) {

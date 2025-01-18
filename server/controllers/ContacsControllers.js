@@ -50,6 +50,31 @@ export const searchContacts = async(request, response, next) => {
     }
 };
 
+export const sendRequest = async(req, res, next) => {
+    const { recipientId } = req.body;
+    const senderId = req.userId; // Ensure `userId` is set from authentication
+
+    if (!recipientId || !senderId) {
+        return res.status(400).send("Recipient and sender are required.");
+    }
+
+    try {
+        // Create a new message indicating request acceptance
+        const message = new Message({
+            sender: senderId,
+            recipient: recipientId,
+            content: "Contact request accepted!",
+            timestamp: new Date(),
+        });
+        await message.save();
+
+        res.status(200).send("Request message sent successfully.");
+    } catch (error) {
+        console.error("Error sending request message:", error);
+        res.status(500).send("Internal Server Error.");
+    }
+};
+
 export const getContactsForList = async(req, res, next) => {
     try {
         let { userId } = req;

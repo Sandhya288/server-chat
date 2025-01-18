@@ -4,11 +4,15 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { useAppStore } from "@/store";
 import { HOST } from "@/lib/constants";
 import { getColor } from "@/lib/utils";
+import { useNavigate } from "react-router-dom";
 
 const ChatHeader = () => {
+  const userInfo = useAppStore();
   const { selectedChatData, closeChat, selectedChatType } = useAppStore();
   const [showMenu, setShowMenu] = useState(false);
+  const [showSubmenu, setShowSubmenu] = useState(false);
   const menuRef = useRef(null);
+  const navigate = useNavigate();
 
   const adImages = [
     "https://cdn.pixabay.com/photo/2023/02/07/17/49/supercar-7774683_640.jpg",
@@ -32,13 +36,18 @@ const ChatHeader = () => {
 
   const handleMenuToggle = () => {
     setShowMenu((prevShowMenu) => !prevShowMenu);
+    setShowSubmenu(false); // Close submenu if main menu is toggled
   };
 
-  // Close menu on clicking outside
+  const handleSubmenuToggle = () => {
+    setShowSubmenu((prevShowSubmenu) => !prevShowSubmenu);
+  };
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
         setShowMenu(false);
+        setShowSubmenu(false);
       }
     };
 
@@ -53,13 +62,30 @@ const ChatHeader = () => {
     setShowMenu(false); // Close menu after selection
   };
 
+  const handleSubmenuItemClick = (option) => {
+    alert(option); // Handle submenu options
+    setShowMenu(false); // Close menu after selection
+    setShowSubmenu(false); // Close submenu
+  };
+
+  const handleProfileClick = () => {
+    if (selectedChatData && selectedChatData._id) {
+      navigate(`/re-profile/${selectedChatData._id}`);
+    } else {
+      console.error("selectedChatData or selectedChatData._id is not defined.");
+    }
+  };
+
   return (
-    <div className="h-[10vh] border-b-2 border-[#2f303b] flex items-center justify-between px-20 bg-[#23239c]">
-      <div className="flex gap-5 items-center">
-        <div className="flex gap-3 items-center justify-center">
-          <div className="w-12 h-12 relative flex items-center justify-center">
+    <div className="h-[10vh] border-b-2 border-[#2f303b] flex items-center justify-between px-4 sm:px-20 bg-[#23239c]">
+      <div className="flex items-center gap-2 sm:gap-5">
+        <div className="flex gap-2 sm:gap-3 items-center">
+          <div
+            className="w-10 sm:w-12 h-10 sm:h-12 relative flex items-center justify-center cursor-pointer"
+            onClick={handleProfileClick}
+          >
             {selectedChatType === "contact" ? (
-              <Avatar className="w-12 h-12 rounded-full overflow-hidden">
+              <Avatar className="w-10 sm:w-12 h-10 sm:h-12 rounded-full overflow-hidden">
                 {selectedChatData.image ? (
                   <AvatarImage
                     src={`${HOST}/${selectedChatData.image}`}
@@ -68,25 +94,23 @@ const ChatHeader = () => {
                   />
                 ) : (
                   <div
-                    className={`uppercase w-12 h-12 text-lg border-[1px] ${getColor(
+                    className={`uppercase w-10 sm:w-12 h-10 sm:h-12 text-base sm:text-lg border-[1px] ${getColor(
                       selectedChatData.color
                     )} flex items-center justify-center rounded-full`}
                   >
                     {selectedChatData.firstName
-                      ? selectedChatData.firstName.split("").shift()
-                      : selectedChatData.email.split("").shift()}
+                      ? selectedChatData.firstName[0]
+                      : selectedChatData.email[0]}
                   </div>
                 )}
               </Avatar>
             ) : (
-              <div
-                className={`bg-[#ffffff22] py-3 px-5 flex items-center justify-center rounded-full`}
-              >
+              <div className="bg-[#ffffff22] py-2 px-4 sm:py-3 sm:px-5 rounded-full flex items-center justify-center">
                 #
               </div>
             )}
           </div>
-          <div>
+          <div className="text-sm sm:text-base">
             {selectedChatType === "channel" && selectedChatData.name}
             {selectedChatType === "contact" && selectedChatData.firstName
               ? selectedChatData.firstName
@@ -94,39 +118,66 @@ const ChatHeader = () => {
           </div>
         </div>
       </div>
-      <div className="flex items-center justify-center gap-5 ml-4">
-        <div className="w-40 h-11 relative">
+      <div className="flex items-center gap-2 sm:gap-5">
+        <div className="w-24 sm:w-40 h-10 sm:h-11 relative">
           <img
             src={adImages[currentAdIndex]}
             alt="Advertisement"
-            className="w-full h-full object-cover rounded items-center"
+            className="w-full h-full object-cover rounded"
           />
         </div>
-        {/* Three-dot menu button */}
-        
+
         <button
           className="text-neutral-300 focus:border-none focus:outline-none focus:text-white transition-all duration-300"
           onClick={closeChat}
         >
-          <RiCloseFill className="text-3xl" />
+          <RiCloseFill className="text-xl sm:text-3xl" />
         </button>
         <div className="relative" ref={menuRef}>
           <button
             onClick={handleMenuToggle}
             className="text-neutral-300 focus:border-none focus:outline-none focus:text-white transition-all duration-300"
           >
-            <RiMoreFill className="text-2xl" />
+            <RiMoreFill className="text-xl sm:text-2xl" />
           </button>
           {showMenu && (
-            <div className="absolute right-0 top-10 bg-white shadow-md rounded-md p-2 w-40 text-gray-700">
+            <div className="absolute right-0 top-10 bg-white shadow-md rounded-md p-2 w-36 sm:w-40 text-gray-700 z-10">
               <button
-                className="w-full text-left px-3 py-2 hover:bg-gray-100"
-                onClick={() => handleMenuItemClick("Payment Release")}
+                className="w-full text-left px-2 py-1 sm:px-3 sm:py-2 hover:bg-gray-100"
+                onClick={handleSubmenuToggle}
               >
                 Payment Release
               </button>
+              {showSubmenu && (
+                <div className="mt-1 bg-white shadow-md rounded-md p-2 w-36 sm:w-40 text-gray-700">
+                  <button
+                    className="w-full text-left px-2 py-1 sm:px-3 sm:py-2 hover:bg-gray-100"
+                    onClick={() => handleSubmenuItemClick("Full Release")}
+                  >
+                    Full Release
+                  </button>
+                  <button
+                    className="w-full text-left px-2 py-1 sm:px-3 sm:py-2 hover:bg-gray-100"
+                    onClick={() => handleSubmenuItemClick("75% Release")}
+                  >
+                    75% Release
+                  </button>
+                  <button
+                    className="w-full text-left px-2 py-1 sm:px-3 sm:py-2 hover:bg-gray-100"
+                    onClick={() => handleSubmenuItemClick("50% Release")}
+                  >
+                    50% Release
+                  </button>
+                  <button
+                    className="w-full text-left px-2 py-1 sm:px-3 sm:py-2 hover:bg-gray-100"
+                    onClick={() => handleSubmenuItemClick("25% Release")}
+                  >
+                    25% Release
+                  </button>
+                </div>
+              )}
               <button
-                className="w-full text-left px-3 py-2 hover:bg-gray-100"
+                className="w-full text-left px-2 py-1 sm:px-3 sm:py-2 hover:bg-gray-100"
                 onClick={() => handleMenuItemClick("Payment Hold")}
               >
                 Payment Hold

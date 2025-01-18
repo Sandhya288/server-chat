@@ -12,6 +12,9 @@ import apiClient from "@/lib/api-client";
 import { GET_USERINFO_ROUTE } from "@/lib/constants";
 import { useAppStore } from "@/store";
 import AboutUsPage from "@/pages/aboutus";
+import Profiless from "./pages/re-profile";
+import TermsAndConditions from "./pages/terms";
+import Termsback from "./pages/terms-backend";
 
 const PrivateRoute = ({ children }) => {
   const { userInfo } = useAppStore();
@@ -87,6 +90,11 @@ function App() {
           }
         />
          <Route path="/:id" element={<AboutUsPage />} />
+         
+<Route path="/re-profile/:id" element={<Profiless />} />
+
+<Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+<Route path="/termsback" element={<Termsback />} />
 
         <Route path="*" element={<Navigate to="/auth" />} />
       </Routes>
