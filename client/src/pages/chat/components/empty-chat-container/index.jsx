@@ -9,7 +9,7 @@ const EmptyChatContainer = () => {
           Hi
           <span className="text-purple-500">!</span> Welcome to
           <span className="text-purple-500">  </span>
-          Chat App<span className="text-purple-500">.</span>
+          ChatMouse<span className="text-purple-500">.</span>
         </h3>
       </div>
     </div>

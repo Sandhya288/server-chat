@@ -226,11 +226,11 @@ const Profile = () => {
  
 
   return (
-    <div className="bg-[#e7e7ec] min-h-screen flex items-center justify-center flex-col gap-10">
-      <div className="w-full md:w-[80vw] max-w-md flex flex-col gap-5 p-5">
+    <div className="bg-[#e7e7ec] min-h-screen flex flex-col gap-10 p-5">
+  <div className="w-full max-w-6xl mx-auto flex flex-col gap-10">
         <div>
           <IoArrowBack
-            className="text-4xl lg:text-6xl text-black text-opacity-90 cursor-pointer"
+            className="text-3xl lg:text-4xl text-black text-opacity-90 cursor-pointer"
             onClick={handleNavigate}
           />
         </div>
@@ -240,22 +240,25 @@ const Profile = () => {
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
           >
-            <Avatar className="h-32 w-32 md:w-48 md:h-48 rounded-full overflow-hidden">
-              {image ? (
-                <AvatarImage
-                  src={image}
-                  alt="profile"
-                  className="object-cover w-full h-full bg-black"
-                />
-              ) : (
-                <div
-                  className={`uppercase h-32 w-32 md:w-48 md:h-48 text-5xl ${colors[selectedColor]} text-[#ff006e] border-[1px] border-[#ff006faa] flex items-center justify-center`}
-                >
-                  {firstName[0]}
-                  {lastName[0]}
-                </div>
-              )}
-            </Avatar>
+             <div className="flex justify-center">
+  <Avatar className="h-32 w-32 md:w-48 md:h-48 rounded-full overflow-hidden">
+    {image ? (
+      <AvatarImage
+        src={image}
+        alt="profile"
+        className="object-cover w-full h-full bg-black"
+      />
+    ) : (
+      <div
+        className="uppercase h-32 w-32 md:w-48 md:h-48 text-5xl flex items-center justify-center bg-gray-300 text-[#ff006e]"
+      >
+        {firstName[0]}
+        {lastName[0]}
+      </div>
+    )}
+  </Avatar>
+</div>
+            
             <input
               type="file"
               accept="image/*"
@@ -280,279 +283,189 @@ const Profile = () => {
               </div>
             )}
           </div>
-          <div className="flex flex-col gap-5">
-            <div className="text-black text-opacity-80">{email}</div>
-            <Input
-              placeholder="First Name"
-              type="text"
-              className="rounded-lg p-3 bg-[#afafb4] border-none flex-1 text-black"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-            />
-            <Input
-              placeholder="Last Name"
-              type="text"
-              className="rounded-lg p-3 bg-[#afafb4] border-none flex-1 text-black"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-            />
-             <Input
-              placeholder="Amount"
-              type="text"
-              className="rounded-lg p-3 bg-[#afafb4] border-none flex-1 text-black"
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-            />
-            <textarea
-  placeholder="About Me"
-  className="rounded-lg p-4 bg-[#afafb4] border-none text-black resize-none"
-  value={aboutMe}
-  onChange={(e) => setAboutMe(e.target.value)}
-  style={{
-    whiteSpace: "pre-wrap",   // Preserve white space and wrap lines
-    overflow: "auto",         // Add scroll if the content overflows
-    width: "100%",            // Set to 100% to fill available container width
-    height: "200px",          // Adjust height as needed
-  }}
-/>
+          <div className="grid grid-cols-3 gap-4 p-5 w-full">
+  {/* Email */}
+  <div className="col-span-3 text-black text-opacity-80">{email}</div>
 
-<Input
-            placeholder="Project 1 URL"
-            type="text"
-            className="rounded-lg p-4 bg-[#afafb4] border-none flex-1 text-black"
-            value={project1}
-            onChange={(e) => setproject1(e.target.value)}
-          />
+  {/* First Name, Amount, Last Name */}
+  <Input
+    placeholder="First Name"
+    type="text"
+    className="rounded-lg p-3 bg-[#afafb4] border-none text-black w-full col-span-1"
+    value={firstName}
+    onChange={(e) => setFirstName(e.target.value)}
+  />
+  <Input
+    placeholder="Amount"
+    type="text"
+    className="rounded-lg p-3 bg-[#afafb4] border-none text-black w-full col-span-1"
+    value={amount}
+    onChange={(e) => setAmount(e.target.value)}
+  />
+  <Input
+    placeholder="Last Name"
+    type="text"
+    className="rounded-lg p-3 bg-[#afafb4] border-none text-black w-full col-span-1"
+    value={lastName}
+    onChange={(e) => setLastName(e.target.value)}
+  />
 
-<Input
-            placeholder=" Project 2 URL"
-            type="text"
-            className="rounded-lg p-4 bg-[#afafb4] border-none flex-1 text-black"
-            value={project2}
-            onChange={(e) => setproject2(e.target.value)}
-          />
+  {/* About Me */}
+  <textarea
+    placeholder="About Me"
+    className="rounded-lg p-4 bg-[#afafb4] border-none text-black resize-none w-full col-span-3"
+    value={aboutMe}
+    onChange={(e) => setAboutMe(e.target.value)}
+    style={{
+      whiteSpace: "pre-wrap",
+      overflow: "auto",
+      height: "200px",
+    }}
+  />
 
-          </div>
-        </div>
+  {/* Project URLs */}
+  <Input
+    placeholder="Project 1 URL"
+    type="text"
+    className="rounded-lg p-4 bg-[#afafb4] border-none text-black w-full col-span-3"
+    value={project1}
+    onChange={(e) => setproject1(e.target.value)}
+  />
+  <Input
+    placeholder="Project 2 URL"
+    type="text"
+    className="rounded-lg p-4 bg-[#afafb4] border-none text-black w-full col-span-3"
+    value={project2}
+    onChange={(e) => setproject2(e.target.value)}
+  />
 
-        <div className="flex flex-col gap-4">
-      <h2 htmlFor="link-search" className="text-black">
-        BUSSINESS CONNECT:
-      </h2>
-      
-      <div>
-        <button
-          onClick={toggleDropdown}
-          className="rounded-lg p-3 bg-[#afafb4] text-black mb-2 w-full text-left"
-        >
-          {selectedLink ? selectedLink : 'Connect Now'}
-        </button>
+  {/* Social URLs */}
+  <Input
+    placeholder="Facebook URL"
+    type="text"
+    className="rounded-lg p-4 bg-[#afafb4] border-none text-black w-full col-span-3"
+    value={facebook}
+    onChange={(e) => setFacebook(e.target.value)}
+  />
+  <Input
+    placeholder="Instagram URL"
+    type="text"
+    className="rounded-lg p-4 bg-[#afafb4] border-none text-black w-full col-span-3"
+    value={instagram}
+    onChange={(e) => setInstagram(e.target.value)}
+  />
+  <Input
+    placeholder="GitHub URL"
+    type="text"
+    className="rounded-lg p-4 bg-[#afafb4] border-none text-black w-full col-span-3"
+    value={github}
+    onChange={(e) => setGithub(e.target.value)}
+  />
+  <Input
+    placeholder="Twitter URL"
+    type="text"
+    className="rounded-lg p-4 bg-[#afafb4] border-none text-black w-full col-span-3"
+    value={twitter}
+    onChange={(e) => setTwitter(e.target.value)}
+  />
 
-        {isOpen && (
-          <div className="relative">
-            <input
-              type="text"
-              id="link-search"
-              placeholder="Search..."
-              value={searchTerm}
-              onFocus={() => setIsOpen(true)}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="rounded-lg p-3 bg-[#afafb4] border-none text-black mb-2 w-full"
-            />
-            {filteredLinks.length > 0 ? (
-              <ul className="absolute bg-[#afafb4] rounded-lg z-10 w-full max-h-40 overflow-y-auto">
-                {filteredLinks.map(link => (
-                  <li
-                    key={link.name}
-                    className="p-2 hover:bg-gray-700 cursor-pointer text-black" // Set text color to white
-                    onClick={() => handleLinkChange(link.url)}
-                  >
-                    {link.name}
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p className="text-black">No links found.</p>
-            )}
-          </div>
-        )}
-      </div>
-
-      {selectedLink && (
-        <div className="mt-4">
-          <a href={selectedLink} target="_blank" rel="noopener noreferrer" className="text-blue-400">
-            Go to {selectedLink}
-          </a>
-        </div>
-      )}
-    </div>
-
-
-        <div className="flex items-center w-full">
-          <Input
-            placeholder="Facebook URL"
-            type="text"
-            className="rounded-lg p-4 bg-[#afafb4] border-none flex-1 text-black"
-            value={facebook}
-            onChange={(e) => setFacebook(e.target.value)}
-          />
-          {facebook && <FaFacebook className="text-2xl ml-2 text-[#3b5998]" />}
-        </div>
-        <div className="flex items-center w-full">
-          <Input
-            placeholder="Instagram URL"
-            type="text"
-            className="rounded-lg p-4 bg-[#afafb4] border-none flex-1 text-black"
-            value={instagram}
-            onChange={(e) => setInstagram(e.target.value)}
-          />
-          {instagram && <FaInstagram className="text-2xl ml-2 text text-[#E1306C]" />}
-        </div>
-        <div className="flex items-center w-full">
-          <Input
-            placeholder="GitHub URL"
-            type="text"
-            className="rounded-lg p-4 bg-[#afafb4] border-none flex-1 text-black"
-            value={github}
-            onChange={(e) => setGithub(e.target.value)}
-          />
-          {github && <FaGithub className="text-2xl ml-2 text-[#333]" />}
-        </div>
-        <div className="flex items-center w-full">
-          <Input
-            placeholder="Twitter URL"
-            type="text"
-            className="rounded-lg p-4 bg-[#afafb4] border-none flex-1 text-black"
-            value={twitter}
-            onChange={(e) => setTwitter(e.target.value)}
-          />
-          {twitter && <FaWhatsapp className="text-2xl ml-2 text-[#1DA1F2]" />}
-        </div>
-
-        <h2 className=" flex  text-black mt-3"> ADD ACCOUNT: </h2>
-
-<div className="flex items-center w-full">
+  {/* Bank Account Details */}
   <Input
     placeholder="Bank Account Holder Name"
     type="text"
-    className="rounded-lg p-4 bg-[#afafb4] border-none flex-1 text-black"
+    className="rounded-lg p-4 bg-[#afafb4] border-none text-black w-full col-span-3"
     value={bankaccountholder}
     onChange={(e) => setBankaccountholder(e.target.value)}
   />
-</div>
-
-<div className="flex items-center w-full">
   <Input
     placeholder="Bank Account Number"
     type="text"
-    className="rounded-lg p-4 bg-[#afafb4] border-none flex-1 text-black"
+    className="rounded-lg p-4 bg-[#afafb4] border-none text-black w-full col-span-3"
     value={accountno}
     onChange={(e) => setAccountno(e.target.value)}
   />
-</div>
-
-<div className="flex items-center w-full">
   <Input
     placeholder="IFSC Code"
     type="text"
-    className="rounded-lg p-4 bg-[#afafb4] border-none flex-1 text-black"
+    className="rounded-lg p-4 bg-[#afafb4] border-none text-black w-full col-span-3"
     value={ifscno}
     onChange={(e) => setIfscno(e.target.value)}
   />
-</div>
-
-<div className="flex items-center w-full">
   <Input
     placeholder="Bank Name"
     type="text"
-    className="rounded-lg p-4 bg-[#afafb4] border-none flex-1 text-black"
+    className="rounded-lg p-4 bg-[#afafb4] border-none text-black w-full col-span-3"
     value={bankname}
     onChange={(e) => setBankname(e.target.value)}
   />
-</div>
-
-<h4 className=" flex justify-center items-center text-black"> OR </h4>
-
-<div className="flex items-center w-full">
   <Input
     placeholder="UPI ID"
     type="text"
-    className="rounded-lg p-4 bg-[#afafb4] border-none flex-1 text-black"
+    className="rounded-lg p-4 bg-[#afafb4] border-none text-black w-full col-span-3"
     value={upiid}
     onChange={(e) => setUpiid(e.target.value)}
   />
-</div>
 
-<h2 className=" flex  text-black mt-3"> Terms and Conditions</h2>
-
-<div className="flex items-center w-full">
-<textarea
-  placeholder="Home"
-  className="rounded-lg p-4 bg-[#afafb4] border-none text-black resize-none"
-  value={home}
-  onChange={(e) => setHome(e.target.value)}
-  style={{
-    whiteSpace: "pre-wrap",   // Preserve white space and wrap lines
-    overflow: "auto",         // Add scroll if the content overflows
-    width: "100%",            // Set to 100% to fill available container width
-    height: "150px",          // Adjust height as needed
-  }}
-/>
-</div>
-
-<div className="flex items-center w-full">
-<textarea
-  placeholder="About"
-  className="rounded-lg p-4 bg-[#afafb4] border-none text-black resize-none"
-  value={about}
-  onChange={(e) => setAbout(e.target.value)}
-  style={{
-    whiteSpace: "pre-wrap",   // Preserve white space and wrap lines
-    overflow: "auto",         // Add scroll if the content overflows
-    width: "100%",            // Set to 100% to fill available container width
-    height: "150px",          // Adjust height as needed
-  }}
-/>
-</div>
-
-<div className="flex items-center w-full">
-<textarea
-  placeholder="Services"
-  className="rounded-lg p-4 bg-[#afafb4] border-none text-black resize-none"
-  value={services}
-  onChange={(e) => setServices(e.target.value)}
-  style={{
-    whiteSpace: "pre-wrap",   // Preserve white space and wrap lines
-    overflow: "auto",         // Add scroll if the content overflows
-    width: "100%",            // Set to 100% to fill available container width
-    height: "150px",          // Adjust height as needed
-  }}
-/>
-</div>
-
-<div className="flex items-center w-full">
-<textarea
-  placeholder="Features"
-  className="rounded-lg p-4 bg-[#afafb4] border-none text-black resize-none"
-  value={features}
-  onChange={(e) => setFeatures(e.target.value)}
-  style={{
-    whiteSpace: "pre-wrap",   // Preserve white space and wrap lines
-    overflow: "auto",         // Add scroll if the content overflows
-    width: "100%",            // Set to 100% to fill available container width
-    height: "150px",          // Adjust height as needed
-  }}
-/>
+  {/* Terms and Conditions */}
+  <textarea
+    placeholder="Home"
+    className="rounded-lg p-4 bg-[#afafb4] border-none text-black resize-none w-full col-span-3"
+    value={home}
+    onChange={(e) => setHome(e.target.value)}
+    style={{
+      whiteSpace: "pre-wrap",
+      overflow: "auto",
+      height: "150px",
+    }}
+  />
+  <textarea
+    placeholder="About"
+    className="rounded-lg p-4 bg-[#afafb4] border-none text-black resize-none w-full col-span-3"
+    value={about}
+    onChange={(e) => setAbout(e.target.value)}
+    style={{
+      whiteSpace: "pre-wrap",
+      overflow: "auto",
+      height: "150px",
+    }}
+  />
+  <textarea
+    placeholder="Services"
+    className="rounded-lg p-4 bg-[#afafb4] border-none text-black resize-none w-full col-span-3"
+    value={services}
+    onChange={(e) => setServices(e.target.value)}
+    style={{
+      whiteSpace: "pre-wrap",
+      overflow: "auto",
+      height: "150px",
+    }}
+  />
+  <textarea
+    placeholder="Features"
+    className="rounded-lg p-4 bg-[#afafb4] border-none text-black resize-none w-full col-span-3"
+    value={features}
+    onChange={(e) => setFeatures(e.target.value)}
+    style={{
+      whiteSpace: "pre-wrap",
+      overflow: "auto",
+      height: "150px",
+    }}
+  />
 </div>
 
 
+</div>
 
-        <Button
-          onClick={saveChanges}
-          className="bg-[#ff006e] hover:bg-[#e60068] transition-all duration-200"
-        >
-          Save Changes
-        </Button>
+
+        <div className="flex justify-end items-end w-full mt-auto">
+  <Button
+    onClick={saveChanges}
+    className="bg-[#ff006e] hover:bg-[#e60068] transition-all duration-200 w-40"
+  >
+    Save Changes
+  </Button>
+</div>
+
       </div>
     </div>
   );

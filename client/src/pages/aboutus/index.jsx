@@ -103,7 +103,7 @@ const About = () => {
           onClick={logout}
           className="absolute top-4 right-4 bg-[#ff006e] text-white py-1 px-2 text-sm rounded hover:bg-[#e6005c]"
         >
-          {"Sign In"}
+          {"Connect"}
         </button>
 
         {!isNavigatingThroughLink && (
@@ -156,7 +156,7 @@ const About = () => {
         {showAbout ? (
           <div className="text-white text-opacity-80 mb-4">
             <h2 className="text-xl font-bold mb-4">
-              {userInfo?.firstName} {userInfo?.lastName}
+              {userInfo?.firstName} 
             </h2>
             <p>{userInfo?.aboutMe}</p>
 

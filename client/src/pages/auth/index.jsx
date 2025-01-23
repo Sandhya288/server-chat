@@ -99,7 +99,7 @@ const Auth = () => {
           <div className="flex items-center justify-center flex-col">
             <h1 className="text-5xl md:text-6xl font-bold">Welcome</h1>
             <p className="font-medium text-center">
-              Fill in the details to get started with the best chat app!
+              Fill in the details to get started with the best chatMouse!
             </p>
           </div>
           <div className="flex items-center justify-center w-full">
