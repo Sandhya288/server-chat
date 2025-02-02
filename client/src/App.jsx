@@ -15,6 +15,7 @@ import AboutUsPage from "@/pages/aboutus";
 import Profiless from "./pages/re-profile";
 import TermsAndConditions from "./pages/terms";
 import Termsback from "./pages/terms-backend";
+import WelcomePage from "./pages/first";
 
 const PrivateRoute = ({ children }) => {
   const { userInfo } = useAppStore();
@@ -90,6 +91,9 @@ function App() {
           }
         />
          <Route path="/:id" element={<AboutUsPage />} />
+         <Route path="/" element={<WelcomePage />} />
+       
+        
          
 <Route path="/re-profile/:id" element={<Profiless />} />
 

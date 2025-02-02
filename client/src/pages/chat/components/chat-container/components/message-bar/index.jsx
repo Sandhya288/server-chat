@@ -231,6 +231,9 @@ const MessageBar = () => {
                 Payment Details
               </h3>
               <form onSubmit={handlePaymentSubmit} className="space-y-4">
+              <h5 className="text-xl  mb-4">Amount :
+              {userInfo.amount} 
+            </h5>
                 <input
                   type="text"
                   name="name"
@@ -249,6 +252,7 @@ const MessageBar = () => {
                   required
                   className="block w-full p-2 md:p-3 bg-[#2e2f3a] text-white rounded-md focus:outline-none"
                 />
+                
                 <input
                   type="text"
                   name="purpose"

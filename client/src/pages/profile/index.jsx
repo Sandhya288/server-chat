@@ -295,19 +295,20 @@ const Profile = () => {
     value={firstName}
     onChange={(e) => setFirstName(e.target.value)}
   />
-  <Input
-    placeholder="Amount"
-    type="text"
-    className="rounded-lg p-3 bg-[#afafb4] border-none text-black w-full col-span-1"
-    value={amount}
-    onChange={(e) => setAmount(e.target.value)}
-  />
+ 
   <Input
     placeholder="Last Name"
     type="text"
     className="rounded-lg p-3 bg-[#afafb4] border-none text-black w-full col-span-1"
     value={lastName}
     onChange={(e) => setLastName(e.target.value)}
+  />
+   <Input
+    placeholder="Amount"
+    type="text"
+    className="rounded-lg p-3 bg-[#afafb4] border-none text-black w-full col-span-1"
+    value={amount}
+    onChange={(e) => setAmount(e.target.value)}
   />
 
   {/* About Me */}

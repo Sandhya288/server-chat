@@ -47,7 +47,7 @@ const About = () => {
   }, [userInfo]);
 
   const logout = async () => {
-    navigate("/logout");
+    navigate("/chat");
   };
 
   const sendQuery = () => {
@@ -99,21 +99,9 @@ const About = () => {
   return (
     <div className="bg-[#1b1c24] min-h-screen flex items-center justify-center flex-col gap-10">
       <div className="w-full md:w-[100vw] max-w-md flex flex-col gap-5 p-5 text-center">
-        <button 
-          onClick={logout}
-          className="absolute top-4 right-4 bg-[#ff006e] text-white py-1 px-2 text-sm rounded hover:bg-[#e6005c]"
-        >
-          {"Connect"}
-        </button>
+       
 
-        {!isNavigatingThroughLink && (
-          <div>
-            <IoArrowBack
-              className="text-2xl mt-6 lg:text-4xl text-white text-opacity-90 cursor-pointer"
-              onClick={() => navigate(-1)}
-            />
-          </div>
-        )}
+       
 
         <div className="flex flex-col items-center mb-5">
           <Avatar className="rounded-full overflow-hidden border-2 border-white cursor-pointer w-40 h-40">
