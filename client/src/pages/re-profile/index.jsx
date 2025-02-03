@@ -99,7 +99,7 @@ const Profiless = () => {
 
         {/* Profile Image Section */}
         <div className="flex flex-col items-center mb-5">
-          <Avatar className="rounded-full overflow-hidden border-2 border-white cursor-pointer w-40 h-40">
+          <Avatar className="rounded-full overflow-hidden border-2 border-white cursor-pointer w-40 h-40 flex items-center justify-center">
             {selectedChatData.image ? (
               <AvatarImage
               src={`${HOST}/${selectedChatData.image}`}
@@ -111,7 +111,7 @@ const Profiless = () => {
                 }}
               />
             ) : (
-              <div className="uppercase h-32 w-32 md:w-48 md:h-48 text-5xl text-[#ff006e] border-[1px] border-[#ff006faa] flex items-center justify-center">
+              <div className="uppercase flex items-center justify-center text-center bg-gray-100 text-5xl text-[#ff006e] border border-[#ff006faa] w-full h-full">
                 {selectedChatData?.firstName[0]}{selectedChatData?.lastName[0]}
               </div>
             )}

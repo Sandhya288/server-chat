@@ -297,7 +297,7 @@ const Profile = () => {
   />
  
   <Input
-    placeholder="Last Name"
+    placeholder="Email"
     type="text"
     className="rounded-lg p-3 bg-[#afafb4] border-none text-black w-full col-span-1"
     value={lastName}

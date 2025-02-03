@@ -61,8 +61,8 @@ const ContactsContainer = () => {
   }, [setChannels]);
 
   const handleDashboardClick = () => {
-    if (userInfo && userInfo.id) {
-      navigate(`/${userInfo.id}`); // Navigate using the user ID
+    if (userInfo && userInfo.id && userInfo.email) {
+      navigate(`/${userInfo.email}`); // Navigate using the user ID
     } else {
       console.error("User info or user ID is not available."); 
     }

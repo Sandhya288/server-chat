@@ -83,7 +83,7 @@ const ContactList = ({ contacts, isChannel = false }) => {
             {isChannel ? (
               <span>{contact.name}</span>
             ) : (
-              <span>{`${contact.firstName} ${contact.lastName}`}</span>
+              <span>{`${contact.firstName} `}</span>
             )}
           </div>
           {newMessages[contact._id] && (

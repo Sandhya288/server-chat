@@ -120,50 +120,56 @@ export const login = async(req, res, next) => {
     }
 };
 
-export const getUserInfo = async(request, response, next) => {
+export const getUserInfo = async(request, response) => {
     try {
         const { id } = request.params;
         console.log(id);
-        if (id) {
-            const userData = await User.findById(id);
-            if (userData) {
-                return response.status(200).json({
-                    id: userData.id,
-                    email: userData.email,
-                    firstName: userData.firstName,
-                    lastName: userData.lastName,
-                    image: userData.image,
-                    profileSetup: userData.profileSetup,
-                    color: userData.color,
-                    aboutMe: userData.aboutMe,
-                    amount: userData.amount, // Make sure this field is retrieved
-                    facebook: userData.facebook, // Ensure you retrieve social media fields
-                    instagram: userData.instagram,
-                    github: userData.github,
-                    twitter: userData.twitter,
 
-                    bankaccountholder: userData.bankaccountholder, // Make sure this field is retrieved
-                    accountno: userData.accountno, // Ensure you retrieve social media fields
-                    ifscno: userData.ifscno,
-                    bankname: userData.bankname,
-                    upiid: userData.upiid,
+        if (!id) {
+            return response.status(400).send("User ID or email is required.");
+        }
 
-                    project1: userData.project1,
-                    project2: userData.project2,
+        let userData;
 
-                    home: userData.home,
-                    about: userData.about,
-                    services: userData.services,
-                    features: userData.features,
-                });
-            } else {
-                return response.status(404).send("User with the given id not found.");
-            }
+        // Check if the 'id' contains '@' to determine if it's an email
+        if (id.includes("@")) {
+            userData = await User.findOne({ email: id }); // Find by email
         } else {
-            return response.status(404).send("User id not found.");
+            userData = await User.findById(id); // Find by ID
+        }
+
+        if (userData) {
+            return response.status(200).json({
+                id: userData.id,
+                email: userData.email,
+                firstName: userData.firstName,
+                lastName: userData.lastName,
+                image: userData.image,
+                profileSetup: userData.profileSetup,
+                color: userData.color,
+                aboutMe: userData.aboutMe,
+                amount: userData.amount,
+                facebook: userData.facebook,
+                instagram: userData.instagram,
+                github: userData.github,
+                twitter: userData.twitter,
+                bankaccountholder: userData.bankaccountholder,
+                accountno: userData.accountno,
+                ifscno: userData.ifscno,
+                bankname: userData.bankname,
+                upiid: userData.upiid,
+                project1: userData.project1,
+                project2: userData.project2,
+                home: userData.home,
+                about: userData.about,
+                services: userData.services,
+                features: userData.features,
+            });
+        } else {
+            return response.status(404).send("User not found.");
         }
     } catch (error) {
-        console.log({ error });
+        console.error({ error });
         return response.status(500).send("Internal Server Error");
     }
 };

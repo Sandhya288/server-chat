@@ -104,23 +104,24 @@ const About = () => {
        
 
         <div className="flex flex-col items-center mb-5">
-          <Avatar className="rounded-full overflow-hidden border-2 border-white cursor-pointer w-40 h-40">
-            {image ? (
-              <AvatarImage
-                src={image}
-                alt="profile"
-                className="object-cover w-full h-full bg-black"
-                onError={(e) => {
-                  e.target.onerror = null;
-                  e.target.src = "path/to/default/image";
-                }}
-              />
-            ) : (
-              <div className="uppercase h-32 w-32 md:w-48 md:h-48 text-5xl text-[#ff006e] border-[1px] border-[#ff006faa] flex items-center justify-center">
-                {userInfo?.firstName[0]}{userInfo?.lastName[0]}
-              </div>
-            )}
-          </Avatar>
+        <Avatar className="rounded-full overflow-hidden border-2 border-white cursor-pointer w-40 h-40 flex items-center justify-center">
+  {image ? (
+    <AvatarImage
+      src={image}
+      alt="profile"
+      className="object-cover w-full h-full bg-black"
+      onError={(e) => {
+        e.target.onerror = null;
+        e.target.src = "path/to/default/image";
+      }}
+    />
+  ) : (
+    <div className="uppercase flex items-center justify-center text-center bg-gray-100 text-5xl text-[#ff006e] border border-[#ff006faa] w-full h-full">
+      {userInfo?.firstName?.[0]}{userInfo?.lastName?.[0]}
+    </div>
+  )}
+</Avatar>
+
         </div>
 
         <div className="flex justify-center gap-4 mb-5">

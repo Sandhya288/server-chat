@@ -22,8 +22,8 @@ const Auth = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const validateLogin = () => {
-    if (!email.length) {
-      toast.error("Email is required.");
+    if (!email.includes("@")) {
+      toast.error("Username must contain '@'.");
       return false;
     }
     if (!password.length) {
@@ -32,10 +32,10 @@ const Auth = () => {
     }
     return true;
   };
-
+  
   const validateSignup = () => {
-    if (!email.length) {
-      toast.error("Email is required.");
+    if (!email.includes("@")) {
+      toast.error("Username must contain '@'.");
       return false;
     }
     if (!password.length) {
@@ -52,6 +52,7 @@ const Auth = () => {
     }
     return true;
   };
+  
 
   const handleLogin = async () => {
     if (!validateLogin()) return;
@@ -120,7 +121,7 @@ const Auth = () => {
               </TabsList>
               <TabsContent value="login" className="flex flex-col gap-5 mt-10">
                 <Input
-                  placeholder="Email"
+                  placeholder="Username Ex: username@123"
                   type="email"
                   className="rounded-full p-6"
                   value={email}
@@ -151,7 +152,7 @@ const Auth = () => {
               </TabsContent>
               <TabsContent value="signup" className="flex flex-col gap-5 mt-10">
                 <Input
-                  placeholder="Email"
+                  placeholder="Username Ex: username@123"
                   type="email"
                   className="rounded-full p-6"
                   value={email}
