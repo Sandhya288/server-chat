@@ -271,12 +271,16 @@ const MessageBar = () => {
                   required
                   className="block w-full p-2 md:p-3 bg-[#2e2f3a] text-white rounded-md focus:outline-none"
                 />
-                <h3
-                  className="flex justify-center font-bold text-blue-800 cursor-pointer"
-                  onClick={handletermsback}
-                >
-                  Terms and conditions
-                </h3>
+                 <input
+                  type="text"
+                  name="note"
+                  placeholder="Note"
+                  value={formData.note}
+                  onChange={handleInputChange}
+                  required
+                  className="block w-full p-2 md:p-3 bg-[#2e2f3a] text-white rounded-md focus:outline-none"
+                />
+                
                 <button
                   type="submit"
                   className="bg-blue-600 text-white w-full py-2 md:py-3 rounded-md hover:bg-blue-800 transition-all duration-300"

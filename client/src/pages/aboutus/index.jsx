@@ -7,6 +7,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { IoArrowBack } from "react-icons/io5";
 import emailjs from 'emailjs-com';
 import apiClient from "@/lib/api-client";
+import { ClipboardCopy, Check } from "lucide-react"; // Import icons
+import { Share2 } from "lucide-react"; 
 
 const About = () => {
   const { firstName } = useParams();
@@ -19,6 +21,32 @@ const About = () => {
   const [image, setImage] = useState(null);
   const [showAbout, setShowAbout] = useState(true);
   const [showShareOptions, setShowShareOptions] = useState(false);
+
+  const [copied, setCopied] = useState(false);
+
+  const logout = async () => {
+    try {
+      const response = await apiClient.post(
+        LOGOUT_ROUTE,
+        {},
+        { withCredentials: true }
+      );
+      if (response.status === 200) {
+        navigate("/auth");
+        setUserInfo(undefined);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const copyToClipboard = () => {
+    if (userInfo?.email) {
+      navigator.clipboard.writeText(userInfo.email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000); // Reset after 2 seconds
+    }
+  };
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -46,9 +74,7 @@ const About = () => {
     }
   }, [userInfo]);
 
-  const logout = async () => {
-    navigate("/chat");
-  };
+ 
 
   const sendQuery = () => {
     const templateParams = {
@@ -76,33 +102,34 @@ const About = () => {
     setFile(e.target.files[0]);
   };
 
-  const handleShare = (platform) => {
+  const handleShare = async (platform) => {
+    if (!userInfo) return;
+  
     const shareLink = `${window.location.origin}/${id}`;
-    
-    navigator.clipboard.writeText(shareLink)
-      .then(() => {
-        let url = "";
-
-        if (platform === "whatsapp") {
-          url = `https://wa.me/?text=${encodeURIComponent(shareLink)}`;
-        } else if (platform === "gmail") {
-          url = `mailto:?subject=Check%20out%20this%20profile&body=${encodeURIComponent(shareLink)}`;
-        }
-
-        window.open(url, "_blank");
-      })
-      .catch(err => {
-        console.error("Failed to copy link:", err);
-      });
+    const profileInfo = `Check out my profile:\n🔗 ${shareLink}\n👤  Username: ${userInfo.email}\n\nJoin me on ChatMouse: chatmouse.in, register and search my username to connect!`;
+  
+    try {
+      await navigator.clipboard.writeText(profileInfo);
+      
+      let url = "";
+      if (platform === "whatsapp") {
+        url = `https://wa.me/?text=${encodeURIComponent(profileInfo)}`;
+      } else if (platform === "gmail") {
+        url = `mailto:?subject=Check%20out%20this%20profile&body=${encodeURIComponent(profileInfo)}`;
+      }
+  
+      window.open(url, "_blank");
+    } catch (err) {
+      console.error("Failed to copy link:", err);
+    }
   };
-
+  
   return (
     <div className="bg-[#1b1c24] min-h-screen flex items-center justify-center flex-col gap-10">
       <div className="w-full md:w-[100vw] max-w-md flex flex-col gap-5 p-5 text-center">
+    
        
-
-       
-
+    
         <div className="flex flex-col items-center mb-5">
         <Avatar className="rounded-full overflow-hidden border-2 border-white cursor-pointer w-40 h-40 flex items-center justify-center">
   {image ? (
@@ -124,38 +151,25 @@ const About = () => {
 
         </div>
 
-        <div className="flex justify-center gap-4 mb-5">
-          <button
-            onClick={() => setShowAbout(true)}
-            className={`py-2 px-4 rounded ${showAbout ? "bg-[#ff006e]" : "bg-[#2f303b]"} text-white`}
-          >
-            About Me
-          </button>
-          <button
-            onClick={() => {
-              setShowAbout(false);
-              setSenderEmail("");
-            }}
-            className={`py-2 px-4 rounded ${!showAbout ? "bg-[#ff006e]" : "bg-[#2f303b]"} text-white`}
-          >
-            Query
-          </button>
-        </div>
+        
 
         {showAbout ? (
           <div className="text-white text-opacity-80 mb-4">
             <h2 className="text-xl font-bold mb-4">
               {userInfo?.firstName} 
             </h2>
+          
+     
+    
             <p>{userInfo?.aboutMe}</p>
 
             <div className="relative mt-4">
-              <button
-                onClick={() => setShowShareOptions(!showShareOptions)}
-                className="py-2 px-4 bg-[#2f303b] hover:bg-[#ff006e] text-white rounded w-[70px] "
-              >
-                Share Profile
-              </button>
+            <button
+  onClick={() => setShowShareOptions(!showShareOptions)}
+  className="py-2 px-4 bg-[#2f303b] hover:bg-[#ff006e] text-white rounded w-[70px]"
+>
+  <Share2 size={24} />
+</button>
               {showShareOptions && (
                 <div className="absolute top-0 right-0 mt-10 flex gap-4 bg-[#2f303b] p-3 rounded shadow-lg z-10">
                   <FaWhatsapp

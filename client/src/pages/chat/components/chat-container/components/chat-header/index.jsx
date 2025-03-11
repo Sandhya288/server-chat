@@ -15,11 +15,11 @@ const ChatHeader = () => {
   const navigate = useNavigate();
 
   const adImages = [
-    "https://cdn.pixabay.com/photo/2023/02/07/17/49/supercar-7774683_640.jpg",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBBz9-k7YwpZD3fwr65EU4bK03ubXl4OQBeNuAae6O6OLJ5gEuC51vP7VOn-qzi9hesWU&usqp=CAU",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9236P_HRkzJgkAzP46MT5li7699Uz5EYg-qqhTrfa2nHj-_qdZ_ghgGx_S_vmTjHNoP0&usqp=CAU",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWp0S0nYnDNvuO6jxcLVFLMZaQa1HqbHMrjvkmF-u9jxzWBDZGfJMAMzu34MeKF3VEGxs&usqp=CAU",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6_QN2R8-WrCfiK1uey3AdJON0FBlPVnhaPrKYutDqn7zny3cs3wNtjyvDn0BaA4USWv8&usqp=CAU",
+    
+    "https://www.mmarchitecturalphotography.com/chicago-architectural-photographer/uploads/2016/01/clarendon-hills-luxury-home-interior.jpg",
+    "https://cdn.decorilla.com/online-decorating/wp-content/uploads/2018/10/modern-interior-design-grey-living-room2.png",
+    "https://wallup.net/wp-content/uploads/2019/09/977071-interior-design-room-furniture-architecture-house-condo-apartment.jpg",
+    "https://wallup.net/wp-content/uploads/2019/09/977071-interior-design-room-furniture-architecture-house-condo-apartment.jpg",
   ];
 
   const [currentAdIndex, setCurrentAdIndex] = useState(0);
@@ -119,7 +119,7 @@ const ChatHeader = () => {
         </div>
       </div>
       <div className="flex items-center gap-2 sm:gap-5">
-        <div className="w-24 sm:w-40 h-10 sm:h-11 relative">
+        <div className="w-24 sm:w-130 h-20 sm:h-11 relative">
           <img
             src={adImages[currentAdIndex]}
             alt="Advertisement"
@@ -134,12 +134,7 @@ const ChatHeader = () => {
           <RiCloseFill className="text-xl sm:text-3xl" />
         </button>
         <div className="relative" ref={menuRef}>
-          <button
-            onClick={handleMenuToggle}
-            className="text-neutral-300 focus:border-none focus:outline-none focus:text-white transition-all duration-300"
-          >
-            <RiMoreFill className="text-xl sm:text-2xl" />
-          </button>
+        
           {showMenu && (
             <div className="absolute right-0 top-10 bg-white shadow-md rounded-md p-2 w-36 sm:w-40 text-gray-700 z-10">
               <button

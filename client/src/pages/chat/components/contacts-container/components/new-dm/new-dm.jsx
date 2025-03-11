@@ -94,7 +94,7 @@ const NewDM = () => {
             Please select a contact
           </DialogDescription>
           <DialogHeader>
-            <DialogTitle>Select a contact from Syncro</DialogTitle>
+            <DialogTitle>Select a contact</DialogTitle>
           </DialogHeader>
           <div>
             <Input

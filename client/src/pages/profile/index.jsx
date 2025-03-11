@@ -372,7 +372,7 @@ const Profile = () => {
 
   {/* Bank Account Details */}
   <Input
-    placeholder="Bank Account Holder Name"
+    placeholder="Bank Holder Name"
     type="text"
     className="rounded-lg p-4 bg-[#afafb4] border-none text-black w-full col-span-3"
     value={bankaccountholder}
@@ -408,50 +408,7 @@ const Profile = () => {
   />
 
   {/* Terms and Conditions */}
-  <textarea
-    placeholder="Home"
-    className="rounded-lg p-4 bg-[#afafb4] border-none text-black resize-none w-full col-span-3"
-    value={home}
-    onChange={(e) => setHome(e.target.value)}
-    style={{
-      whiteSpace: "pre-wrap",
-      overflow: "auto",
-      height: "150px",
-    }}
-  />
-  <textarea
-    placeholder="About"
-    className="rounded-lg p-4 bg-[#afafb4] border-none text-black resize-none w-full col-span-3"
-    value={about}
-    onChange={(e) => setAbout(e.target.value)}
-    style={{
-      whiteSpace: "pre-wrap",
-      overflow: "auto",
-      height: "150px",
-    }}
-  />
-  <textarea
-    placeholder="Services"
-    className="rounded-lg p-4 bg-[#afafb4] border-none text-black resize-none w-full col-span-3"
-    value={services}
-    onChange={(e) => setServices(e.target.value)}
-    style={{
-      whiteSpace: "pre-wrap",
-      overflow: "auto",
-      height: "150px",
-    }}
-  />
-  <textarea
-    placeholder="Features"
-    className="rounded-lg p-4 bg-[#afafb4] border-none text-black resize-none w-full col-span-3"
-    value={features}
-    onChange={(e) => setFeatures(e.target.value)}
-    style={{
-      whiteSpace: "pre-wrap",
-      overflow: "auto",
-      height: "150px",
-    }}
-  />
+ 
 </div>
 
 
