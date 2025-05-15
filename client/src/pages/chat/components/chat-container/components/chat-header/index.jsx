@@ -119,7 +119,7 @@ const ChatHeader = () => {
         </div>
       </div>
       <div className="flex items-center gap-2 sm:gap-5">
-        <div className="w-24 sm:w-130 h-20 sm:h-11 relative">
+        <div className="s">
           <img
             src={adImages[currentAdIndex]}
             alt="Advertisement"
