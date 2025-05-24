@@ -143,7 +143,7 @@ const MessageBar = () => {
     const { name, email, purpose, timeDuration } = formData;
     emailjs
       .send(
-        "service_et62cap",
+        "service_et62cap",  
         "template_bwda0x8",
         { email, name, purpose, timeDuration },
         "2VsnAhfuGdny4gP6m"
@@ -167,7 +167,7 @@ const MessageBar = () => {
   
     return (
       <div className="w-full px-2 md:px-4">
-        <div className="h-[10vh] bg-[#b6b6c0] flex justify-center items-center px-2 gap-2 mb-5">
+        <div className="h-[10vh] bg-[#b6b6c0] flex justify-center items-center px-2 gap-2 mb-10">
           <div className="flex-1 flex items-center bg-[#41424b] rounded-md p-2 md:p-3 pr-4">
             <input
               type="text"

@@ -119,13 +119,7 @@ const ChatHeader = () => {
         </div>
       </div>
       <div className="flex items-center gap-2 sm:gap-5">
-        <div className="s">
-          <img
-            src={adImages[currentAdIndex]}
-            alt="Advertisement"
-            className="w-full h-full object-cover rounded"
-          />
-        </div>
+       
 
         <button
           className="text-neutral-300 focus:border-none focus:outline-none focus:text-white transition-all duration-300"

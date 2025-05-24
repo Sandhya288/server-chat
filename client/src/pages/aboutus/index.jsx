@@ -163,26 +163,31 @@ const About = () => {
     
             <p>{userInfo?.aboutMe}</p>
 
-            <div className="relative mt-4">
-            <button
-  onClick={() => setShowShareOptions(!showShareOptions)}
-  className="py-2 px-4 bg-[#2f303b] hover:bg-[#ff006e] text-white rounded w-[70px]"
->
-  <Share2 size={24} />
-</button>
-              {showShareOptions && (
-                <div className="absolute top-0 right-0 mt-10 flex gap-4 bg-[#2f303b] p-3 rounded shadow-lg z-10">
-                  <FaWhatsapp
-                    onClick={() => handleShare("whatsapp")}
-                    className="text-green-500 text-2xl cursor-pointer"
-                  />
-                  <FaEnvelope
-                    onClick={() => handleShare("gmail")}
-                    className="text-red-500 text-2xl cursor-pointer"
-                  />
-                </div>
-              )}
-            </div>
+           <div className="fixed top-[15px] right-[10px] z-50">
+  {/* Share Button */}
+  <button
+    onClick={() => setShowShareOptions(!showShareOptions)}
+    className="py-2 px-4 bg-[#2f303b] hover:bg-[#ff006e] text-white rounded w-[70px] flex justify-center items-center"
+  >
+    <Share2 size={20} />
+  </button>
+
+  {/* Share Options Dropdown */}
+  {showShareOptions && (
+    <div className="mt-2 bg-[#2f303b] p-3 rounded shadow-lg flex gap-4">
+      <FaWhatsapp
+        onClick={() => handleShare("whatsapp")}
+        className="text-green-500 text-2xl cursor-pointer"
+      />
+      <FaEnvelope
+        onClick={() => handleShare("gmail")}
+        className="text-red-500 text-2xl cursor-pointer"
+      />
+    </div>
+  )}
+</div>
+
+
             <div className="flex justify-center gap-4 mt-5">
               {userInfo?.facebook && <a href={userInfo.facebook} target="_blank" className="text-2xl text-[#3b5998]"><FaFacebook /></a>}
               {userInfo?.instagram && <a href={userInfo.instagram} target="_blank" className="text-2xl text-[#E1306C]"><FaInstagram /></a>}
